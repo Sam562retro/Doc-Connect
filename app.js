@@ -8,12 +8,17 @@ const path = require('path')
 
 // *******************************************************************************************************************
 
+const docRouter = require("./router/doctor");
+const hospRouter = require("./router/hospital");
+const patRouter = require("./router/patient");
+
+// *******************************************************************************************************************
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 
 const connection = () => {
-    mongoose.connect('mongodb+srv://gsoham562:2g2Yy8yvVNMLYmnU@star-website.e30uxrn.mongodb.net/?retryWrites=true&w=majority', {
+    mongoose.connect('mongodb+srv://gsoham562:O3tkapzWXLA7bBBB@docconnect.t2ej7t6.mongodb.net/?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
@@ -37,13 +42,55 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // *******************************************************************************************************************
 
+app.use('/doctor', (req,res,next) => {
+    session = req.session;
+    if(session.userid){
+        res.locals.userSession = true;
+        next()
+    }else{
+        res.redirect('/login')
+    }
+})
 
+app.use('/hospital', (req,res,next) => {
+    session = req.session;
+    if(session.userid){
+        res.locals.userSession = true;
+        next()
+    }else{
+        res.redirect('/login')
+    }
+})
+
+app.use('/patient', (req,res,next) => {
+    session = req.session;
+    if(session.userid){
+        res.locals.userSession = true;
+        next()
+    }else{
+        res.redirect('/login')
+    }
+})
 
 // *******************************************************************************************************************
 
 app.get("/", (req, res) => {
     res.send("Hello World");
 })
+
+
+app.get("/login")
+
+app.get("/register")
+
+app.post("/login")
+
+app.post("/register")
+
+
+app.use('/doctor', docRouter);
+app.use('/hospital', hospRouter);
+app.use('/patient', patRouter);
 
 // *******************************************************************************************************************
 
