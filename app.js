@@ -6,6 +6,8 @@ const sessions = require('express-session');
 const cookieParser = require("cookie-parser");
 const path = require('path');
 const fileupload = require("express-fileupload");
+const fs= require("fs");
+const randomstring = require("randomstring");
 
 // *******************************************************************************************************************
 
@@ -22,7 +24,6 @@ const patSchema = require("./model/patient")
 // *******************************************************************************************************************
 
 app.use('/', express.static(path.join(__dirname, 'public')))
-app.use(fileupload());
 
 const connection = () => {
     mongoose.connect('mongodb+srv://gsoham562:O3tkapzWXLA7bBBB@docconnect.t2ej7t6.mongodb.net/?retryWrites=true&w=majority', {
@@ -36,6 +37,8 @@ connection();
 
 
 app.use(cookieParser());
+app.use(fileupload());
+var session;
 app.use(sessions({
     secret: "hberbghebghebghekjnvehibvknseigndfv3234567gfdsdfghjshcvq4d5786efdfwuidhy267kjfneve",
     saveUninitialized:true,
@@ -94,9 +97,10 @@ app.post("/login", (req, res) => {
     if(req.body.type == "doctor"){
         docSchema.find({phone: req.body.mobile, password: req.body.password})
         .then(ret => {
-            if(ret._id){
+            if(ret[0]._id){
                 session=req.session;
-                session.userid=ret._id;
+                session.userid=ret[0]._id;
+                res.redirect("/doctor")
             }else{
                 res.redirect("/logreg")
             }
@@ -107,9 +111,10 @@ app.post("/login", (req, res) => {
     }else if(req.body.type == "patient"){
         patSchema.find({phone: req.body.mobile, password: req.body.password})
         .then(ret => {
-            if(ret._id){
+            if(ret[0]._id){
                 session=req.session;
-                session.userid=ret._id;
+                session.userid=ret[0]._id;
+                res.redirect("/patient")
             }else{
                 res.redirect("/logreg")
             }
@@ -120,9 +125,10 @@ app.post("/login", (req, res) => {
     }else if(req.body.type == "hospital"){
         hospSchema.find({phone: req.body.mobile, password: req.body.password})
         .then(ret => {
-            if(ret._id){
+            if(ret[0]._id){
                 session=req.session;
-                session.userid=ret._id;
+                session.userid=ret[0]._id;
+                res.redirect("/hospital")
             }else{
                 res.redirect("/logreg")
             }
@@ -150,7 +156,11 @@ app.post("/register", (req, res) => {
         // })
     }else if(req.body.type == "patient"){
         patSchema.create({
-            
+            name: req.body.name,
+            password:req.body.password,
+            phone:req.body.mobile,
+            age:req.body.age,
+            gender:req.body.gender,
         }).then(item => {
             session=req.session;
             session.userid=item._id;
@@ -160,16 +170,17 @@ app.post("/register", (req, res) => {
             res.redirect("/")
         })
     }else if(req.body.type == "hospital"){
-        hospSchema.create({
+        console.log(req.files)
+        // hospSchema.create({
             
-        }).then(item => {
-            session=req.session;
-            session.userid=item._id;
-            res.redirect("/hospital")
-        }).catch(err => {
-            console.log(err)
-            res.redirect("/")
-        })
+        // }).then(item => {
+        //     session=req.session;
+        //     session.userid=item._id;
+        //     res.redirect("/hospital")
+        // }).catch(err => {
+        //     console.log(err)
+        //     res.redirect("/")
+        // })
     }else{
         res.redirect("/logreg?register")
     }
