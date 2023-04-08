@@ -48,7 +48,7 @@
           <div class="heading">Register</div>
           <div class="subHeading">DocConnect Welcomes You</div>
         </div>
-        <form method="POST" action="/register">
+        <form method="POST" action="/register" enctype="multipart/form-data">
 
          <div class="container">
             <input type="text" id="name" name="name">
@@ -112,6 +112,35 @@
 
         var lis = []
         if(type == "doctor"){
+            
+            navigator.geolocation.getCurrentPosition(pos, eror)
+
+            function pos(position){
+                var la = document.createElement("input");
+                la.setAttribute("type", "hidden");
+                la.setAttribute("name", "latitude");
+                la.value = position.coords.latitude;
+                box.appendChild(la);
+                var lo = document.createElement("input");
+                lo.setAttribute("type", "hidden");
+                lo.setAttribute("name", "longitude");
+                lo.value = position.coords.longitude;
+                box.appendChild(lo);
+            }
+
+            function eror(error){
+                var la = document.createElement("input");
+                la.setAttribute("type", "hidden");
+                la.setAttribute("name", "latitude");
+                la.value = false;
+                box.appendChild(la);
+                var lo = document.createElement("input");
+                lo.setAttribute("type", "hidden");
+                lo.setAttribute("name", "longitude");
+                lo.value = false;
+                box.appendChild(lo);
+            }
+
             lis = [
                 {
                     name: "email",
@@ -130,6 +159,35 @@
                 }
             ]
         }else if(type == "patient"){
+
+          navigator.geolocation.getCurrentPosition(pos, eror)
+
+          function pos(position){
+              var la = document.createElement("input");
+              la.setAttribute("type", "hidden");
+              la.setAttribute("name", "latitude");
+              la.value = position.coords.latitude;
+              box.appendChild(la);
+              var lo = document.createElement("input");
+              lo.setAttribute("type", "hidden");
+              lo.setAttribute("name", "longitude");
+              lo.value = position.coords.longitude;
+              box.appendChild(lo);
+          }
+
+          function eror(error){
+              var la = document.createElement("input");
+              la.setAttribute("type", "hidden");
+              la.setAttribute("name", "latitude");
+              la.value = false;
+              box.appendChild(la);
+              var lo = document.createElement("input");
+              lo.setAttribute("type", "hidden");
+              lo.setAttribute("name", "longitude");
+              lo.value = false;
+              box.appendChild(lo);
+          }
+
             lis = [
                 {
                     name: "age",
@@ -163,6 +221,11 @@
                     name: "img",
                     type: "file",
                     text: "Image Of Hospital Front"
+                },
+                {
+                    name: "fare",
+                    type: "number",
+                    text: "Fare for room (per hour)"
                 }
             ]
         }

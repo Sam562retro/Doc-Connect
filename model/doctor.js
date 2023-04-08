@@ -24,7 +24,7 @@ const docSchema = new mongoose.Schema({
     },
     location:{
         required: true,
-        type: String
+        type: [String]
     },
     MBBS:{
         required: true,

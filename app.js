@@ -88,7 +88,6 @@ app.get("/", (req, res) => {
     res.render("home");
 })
 
-
 app.get("/logreg", (req, res) => {
     res.render("logreg")
 })
@@ -143,17 +142,32 @@ app.post("/login", (req, res) => {
 
 app.post("/register", (req, res) => {
     if(req.body.type == "doctor"){
-        console.log(req.files)
-        // docSchema.create({
-            
-        // }).then(item => {
-        //     session=req.session;
-        //     session.userid=item._id;
-        //     res.redirect("/doctor")
-        // }).catch(err => {
-        //     console.log(err)
-        //     res.redirect("/")
-        // })
+        var obj = { 
+            name : req.body.name, 
+            password : req.body.password,
+            phone : req.body.mobile,
+            email : req.body.email,
+            location: [req.body.latitude,req.body.longitude]
+        }
+
+        const fileName = randomstring.generate() + req.files.mbbs.name;
+        const filePath = __dirname + '/public/doctor-proofs/' + fileName;
+        req.files.mbbs.mv(filePath).catch(err=> (console.log(err)))
+        obj.mbbs = `/doctor-proofs/` + fileName;
+
+        const fileName2 = randomstring.generate() + req.files.mdms.name;
+        const filePath2 = __dirname + '/public/doctor-proofs/' + fileName;
+        req.files.mdms.mv(filePath2).catch(err=> (console.log(err)))
+        obj.mdms = `/doctor-proofs/` + fileName2;
+
+        docSchema.create(obj).then(item => {
+            session=req.session;
+            session.userid=item._id;
+            res.redirect("/doctor")
+        }).catch(err => {
+            console.log(err)
+            res.redirect("/")
+        })
     }else if(req.body.type == "patient"){
         patSchema.create({
             name: req.body.name,
@@ -161,6 +175,7 @@ app.post("/register", (req, res) => {
             phone:req.body.mobile,
             age:req.body.age,
             gender:req.body.gender,
+            location: [req.body.latitude,req.body.longitude]
         }).then(item => {
             session=req.session;
             session.userid=item._id;
@@ -170,17 +185,29 @@ app.post("/register", (req, res) => {
             res.redirect("/")
         })
     }else if(req.body.type == "hospital"){
-        console.log(req.files)
-        // hospSchema.create({
-            
-        // }).then(item => {
-        //     session=req.session;
-        //     session.userid=item._id;
-        //     res.redirect("/hospital")
-        // }).catch(err => {
-        //     console.log(err)
-        //     res.redirect("/")
-        // })
+        var obj = { 
+            name : req.body.name, 
+            password : req.body.password,
+            phone : req.body.mobile,
+            email : req.body.email,
+            roomData : req.body.roomdata,
+            address : req.body.address,
+            fare : req.body.fare
+        }
+
+        const fileName = randomstring.generate() + req.files.img.name;
+        const filePath = __dirname + '/public/hospital-images/' + fileName;
+        req.files.img.mv(filePath).catch(err=> (console.log(err)))
+        obj.image = `/hospital-images/` + fileName;
+
+        hospSchema.create(obj).then(item => {
+            session=req.session;
+            session.userid=item._id;
+            res.redirect("/hospital")
+        }).catch(err => {
+            console.log(err)
+            res.redirect("/")
+        })
     }else{
         res.redirect("/logreg?register")
     }

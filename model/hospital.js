@@ -33,6 +33,10 @@ const hospSchema = new mongoose.Schema({
     image:{
         required: true,
         type: String
+    },
+    fare:{
+        required: true,
+        type: Number
     }
 });
 
