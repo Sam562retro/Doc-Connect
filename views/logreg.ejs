@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/css/logreg.css">
+  <link
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Alfa+Slab+One&family=Montserrat:wght@600;700;800;900&family=Mouse+Memoirs&family=Oswald:wght@200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&family=Roboto+Mono:wght@100;200;300;400;500;600;700&family=Roboto+Slab:wght@100;300;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+  <div class="tabsBox">
+
+
+    <div class="box">
+      <div id="loginDiv" class="login">
+        <div class="headings">
+          <div class="heading">DocConnect</div>
+          <div class="subHeading">Glad For Your Return</div>
+        </div>
+
+        <form action="/login" method="POST">
+        <div class="select">
+            <select name="type" id="type" required>
+                <option selected disabled>Who are you (Select)</option>
+                <option value="doctor">Doctor</option>
+                <option value="patient">Patient</option>
+                <option value="hospital">Hospital</option>
+            </select>
+        </div>
+          <div class="container">
+            <input type="number" id="mobile" name="mobile" required>
+            <label for="mobile" class="label">Phone</label>
+          </div>
+
+          <div class="container">
+            <input type="password" id="password" name="password" required>
+            <label for="password">Password</label>
+          </div>
+          <br>
+          <input class="sign-in" type="submit" value="Sign in">
+        </form>
+      </div>
+
+
+      <div id="registerDiv" class="register display">
+        <div class="headings">
+          <div class="heading">Register</div>
+          <div class="subHeading">DocConnect Welcomes You</div>
+        </div>
+        <form method="POST" action="/register">
+
+         <div class="container">
+            <input type="text" id="name" name="name">
+            <label for="mobile" class="label">Name</label>
+          </div>
+
+         <div class="container">
+            <input type="number" id="mobile" name="mobile">
+            <label for="mobile" class="label">Phone</label>
+          </div>
+
+          <div class="container">
+            <input type="password" id="password" name="password">
+            <label for="password">Password</label>
+          </div>
+
+          <div class="select">
+            <select name="type" id="type-register" onclick onchange="changeSpeacialField()">
+               <option selected disabled>Who are you (Select)</option>
+               <option value="doctor">Doctor</option>
+               <option value="patient">Patient</option>
+               <option value="hospital">Hospital</option>
+            </select>
+         </div>
+
+        <div class="container" id="speacialField">
+            
+        </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div class="tabs">
+      <div id="login" class="tab active" onclick="activeL()">
+        Login
+      </div>
+      <div id="register" class="tab" onclick="activeR()">
+        Register
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+
+    function changeSpeacialField(){
+
+        var type = document.querySelector("#type-register").value;
+        var box = document.querySelector("#speacialField");
+
+        box.innerHTML = ""
+
+        var sub = document.createElement("input");
+        sub.setAttribute("type", "submit");
+        sub.classList.add("sign-in");
+        sub.setAttribute("value", "Register");
+        box.appendChild(sub);
+
+        var br = document.createElement("br");
+        box.appendChild(br)
+
+        var lis = []
+        if(type == "doctor"){
+            lis = [
+                {
+                    name: "email",
+                    type: "email",
+                    text: "Email"
+                }, 
+                {
+                    name: "mbbs",
+                    type: "file",
+                    text: "MBBS Degree Proof"
+                },
+                {
+                    name: "mdms",
+                    type: "file",
+                    text: "MD/MS Degree Proof"
+                }
+            ]
+        }else if(type == "patient"){
+            lis = [
+                {
+                    name: "age",
+                    type: "number",
+                    text: "Age"
+                }, 
+                {
+                    name: "gender",
+                    type: "gender",
+                    text: "Gender"
+                }
+            ]
+        }else if(type == "hospital"){
+            lis = [
+                {
+                    name: "email",
+                    type: "email",
+                    text: "Email"
+                },
+                {
+                    name: "address",
+                    type: "text",
+                    text: "Address"
+                },
+                {
+                    name: "roomdata",
+                    type: "textarea",
+                    text: "Describe Facilities in short (Like, x-ray, )"
+                }, 
+                {
+                    name: "img",
+                    type: "file",
+                    text: "Image Of Hospital Front"
+                }
+            ]
+        }
+        lis.forEach(elem => {
+            
+            var x = document.createElement("div");
+            x.classList.add("container");
+
+            if(elem.type == "gender"){
+                x.classList.add("select");
+                var b = document.createElement("select");
+                b.setAttribute("name","gender");
+                b.innerHTML += "<option selected diabled>Gender (Select)</option>";
+                b.innerHTML += "<option value='Male'>Male</option>";
+                b.innerHTML += "<option value='Female'>Female</option>";
+                b.innerHTML += "<option value='Other'>Other</option>";
+
+                x.appendChild(b)
+            }else{
+                var y = document.createElement("input");
+                if(elem.type == "textarea"){
+                    y.setAttribute("type", "text");
+                }else{
+                    y.setAttribute("type", `${elem.type}`);
+                }
+                y.setAttribute("name", `${elem.name}`);
+                y.setAttribute("id", `${elem.name}`);
+                y.setAttribute("required", "required");
+                x.appendChild(y);
+
+                var z = document.createElement("label")
+                z.setAttribute("for", `${elem.name}`)
+                z.appendChild(document.createTextNode(`${elem.text}`));
+                if(elem.type == "file" || elem.type == "textarea"){
+                    z.classList.add("fileLabel")
+                }
+                x.appendChild(z)
+            }
+            box.appendChild(x);
+        })
+    
+    
+
+    }
+
+  function activeL() {
+    login = document.getElementById("login");
+    loginDiv = document.getElementById("loginDiv");
+    regsiterDiv = document.getElementById("registerDiv");
+    regsiter = document.getElementById("register");
+    login.classList.add("active")
+    register.classList.remove("active")
+    loginDiv.classList.remove("display")
+    regsiterDiv.classList.add("display")
+  }
+  function activeR() {
+    login = document.getElementById("login");
+    loginDiv = document.getElementById("loginDiv");
+    regsiterDiv = document.getElementById("registerDiv");
+    regsiter = document.getElementById("register");
+    login.classList.remove("active")
+    register.classList.add("active")
+    loginDiv.classList.add("display")
+    regsiterDiv.classList.remove("display")
+  }
+</script>
+</html>

@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const sessions = require('express-session');
 const cookieParser = require("cookie-parser");
-const path = require('path')
+const path = require('path');
+const fileupload = require("express-fileupload");
 
 // *******************************************************************************************************************
 
@@ -14,8 +15,14 @@ const patRouter = require("./router/patient");
 
 // *******************************************************************************************************************
 
-app.use('/', express.static(path.join(__dirname, 'public')))
+const docSchema = require("./model/doctor")
+const hospSchema = require("./model/hospital")
+const patSchema = require("./model/patient")
 
+// *******************************************************************************************************************
+
+app.use('/', express.static(path.join(__dirname, 'public')))
+app.use(fileupload());
 
 const connection = () => {
     mongoose.connect('mongodb+srv://gsoham562:O3tkapzWXLA7bBBB@docconnect.t2ej7t6.mongodb.net/?retryWrites=true&w=majority', {
@@ -79,15 +86,95 @@ app.get("/", (req, res) => {
 })
 
 
-app.get("/login", (req, res) => {
-    res.render("login")
+app.get("/logreg", (req, res) => {
+    res.render("logreg")
 })
 
-app.get("/register")
+app.post("/login", (req, res) => {
+    if(req.body.type == "doctor"){
+        docSchema.find({phone: req.body.mobile, password: req.body.password})
+        .then(ret => {
+            if(ret._id){
+                session=req.session;
+                session.userid=ret._id;
+            }else{
+                res.redirect("/logreg")
+            }
+        }).catch(err => {
+            console.log(err)
+            res.redirect("/")
+        })
+    }else if(req.body.type == "patient"){
+        patSchema.find({phone: req.body.mobile, password: req.body.password})
+        .then(ret => {
+            if(ret._id){
+                session=req.session;
+                session.userid=ret._id;
+            }else{
+                res.redirect("/logreg")
+            }
+        }).catch(err => {
+            console.log(err)
+            res.redirect("/")
+        })
+    }else if(req.body.type == "hospital"){
+        hospSchema.find({phone: req.body.mobile, password: req.body.password})
+        .then(ret => {
+            if(ret._id){
+                session=req.session;
+                session.userid=ret._id;
+            }else{
+                res.redirect("/logreg")
+            }
+        }).catch(err => {
+            console.log(err)
+            res.redirect("/")
+        })
+    }else{
+        res.redirect("/logreg")
+    }
+})
 
-app.post("/login")
+app.post("/register", (req, res) => {
+    if(req.body.type == "doctor"){
+        console.log(req.files)
+        // docSchema.create({
+            
+        // }).then(item => {
+        //     session=req.session;
+        //     session.userid=item._id;
+        //     res.redirect("/doctor")
+        // }).catch(err => {
+        //     console.log(err)
+        //     res.redirect("/")
+        // })
+    }else if(req.body.type == "patient"){
+        patSchema.create({
+            
+        }).then(item => {
+            session=req.session;
+            session.userid=item._id;
+            res.redirect("/patient")
+        }).catch(err => {
+            console.log(err)
+            res.redirect("/")
+        })
+    }else if(req.body.type == "hospital"){
+        hospSchema.create({
+            
+        }).then(item => {
+            session=req.session;
+            session.userid=item._id;
+            res.redirect("/hospital")
+        }).catch(err => {
+            console.log(err)
+            res.redirect("/")
+        })
+    }else{
+        res.redirect("/logreg?register")
+    }
+})
 
-app.post("/register")
 
 
 app.use('/doctor', docRouter);
