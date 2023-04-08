@@ -11,7 +11,8 @@ const patSchema = new mongoose.Schema({
     },
     phone:{
         required: true,
-        type: Number
+        type: Number,
+        unique: true
     },
     age:{
         required: true,

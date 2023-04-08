@@ -7,7 +7,8 @@ const docSchema = new mongoose.Schema({
     },
     password:{
         required: true,
-        type: String
+        type: String,
+        unique: true
     },
     phone:{
         required: true,
@@ -26,11 +27,11 @@ const docSchema = new mongoose.Schema({
         required: true,
         type: [String]
     },
-    MBBS:{
+    mbbs:{
         required: true,
         type: String
     },
-    MDMS:{
+    mdms:{
         required: true,
         type: String
     }

@@ -7,7 +7,8 @@ const hospSchema = new mongoose.Schema({
     },
     password:{
         required: true,
-        type: String
+        type: String,
+        unique: true
     },
     phone:{
         required: true,

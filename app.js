@@ -153,21 +153,22 @@ app.post("/register", (req, res) => {
         const fileName = randomstring.generate() + req.files.mbbs.name;
         const filePath = __dirname + '/public/doctor-proofs/' + fileName;
         req.files.mbbs.mv(filePath).catch(err=> (console.log(err)))
-        obj.mbbs = `/doctor-proofs/` + fileName;
+        obj.mbbs = `/doctor-proofs/${fileName}`;
 
         const fileName2 = randomstring.generate() + req.files.mdms.name;
         const filePath2 = __dirname + '/public/doctor-proofs/' + fileName;
         req.files.mdms.mv(filePath2).catch(err=> (console.log(err)))
-        obj.mdms = `/doctor-proofs/` + fileName2;
+        obj.mdms = `/doctor-proofs/${fileName2}`;
 
         docSchema.create(obj).then(item => {
             session=req.session;
             session.userid=item._id;
-            res.redirect("/doctor")
+            res.redirect("/doctor");
         }).catch(err => {
             console.log(err)
-            res.redirect("/")
+            res.redirect("/logreg?register")
         })
+
     }else if(req.body.type == "patient"){
         patSchema.create({
             name: req.body.name,
@@ -182,8 +183,9 @@ app.post("/register", (req, res) => {
             res.redirect("/patient")
         }).catch(err => {
             console.log(err)
-            res.redirect("/")
+            res.redirect("/logreg?register")
         })
+
     }else if(req.body.type == "hospital"){
         var obj = { 
             name : req.body.name, 
@@ -206,7 +208,7 @@ app.post("/register", (req, res) => {
             res.redirect("/hospital")
         }).catch(err => {
             console.log(err)
-            res.redirect("/")
+            res.redirect("/logreg?register")
         })
     }else{
         res.redirect("/logreg?register")
