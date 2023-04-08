@@ -215,7 +215,13 @@ app.post("/register", (req, res) => {
     }
 })
 
-
+app.get("/logout", (req, res) => {
+    session = req.session;
+    if(session.userid){
+        req.session.destroy();
+    }
+    res.redirect("/logreg")
+})
 
 app.use('/doctor', docRouter);
 app.use('/hospital', hospRouter);

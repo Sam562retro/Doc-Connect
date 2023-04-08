@@ -8,7 +8,7 @@
         rel="stylesheet">
 </head>
 
-<body>
+<body onload="changeCheck()">
   <div class="tabsBox">
 
 
@@ -93,6 +93,14 @@
   </div>
 </body>
 <script>
+    function changeCheck(){
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      if(urlParams.has('register')){
+        activeR()
+      }
+    }
+
 
     function changeSpeacialField(){
 
