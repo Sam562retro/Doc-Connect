@@ -1,0 +1,85 @@
+.sideNav{
+    height: 100vh;
+    width: 18vw;
+    position: fixed;
+    z-index: 100;
+    background-color: #5F9EA0;
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.heading{
+    font-size: 2vw;
+    font-family: Bebas Neue;
+}
+.Bi{
+    margin-left: 1vh;
+}
+
+.list{
+    margin-top: 3vh;
+}
+
+.item{
+    width: 18vw;
+    background-color: #b9d7d966;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 7vh;
+    border-bottom: #b9d7d9e7 1px solid;
+    transition: all 200ms ease-in-out;
+    font-size: 1.1vw;
+}
+
+.item:hover{
+    background-color: #b9d7d9a4;
+    cursor: pointer;
+}
+
+.item:nth-child(1):hover > .icon{
+    transform: rotate(340deg);
+}
+
+.item:nth-child(2):hover > .icon{
+    transform: rotate(400deg);
+}
+
+.item:nth-child(3):hover > .icon{
+    transform: rotate(450deg);
+}
+
+.item:nth-child(4):hover > .icon{
+    transform: rotate(1480deg);
+}
+
+.item:nth-child(1){
+    border-top: #b9d7d9e7 1px solid;
+}
+
+.item span{
+    margin-right: 2vw;
+}
+
+.icon{
+    margin-left: 2vw;
+    font-size: 1.5vw;
+    transition: all 150ms ease-in-out;
+}
+
+.logOut{
+    background-color: #dc3545 !important;
+    /* margin-bottom: 5vh; */
+    border: none;
+    transition: all ease-out 200ms;
+}
+
+.logOut:hover{
+    background-color: #66040e;
+    color: var(--text);
+    cursor: pointer;
+}

@@ -5,7 +5,9 @@ const docSchema = require("./../model/doctor")
 const hospSchema = require("./../model/hospital")
 const patSchema = require("./../model/patient")
 
-router.get("/")
+router.get("/", (req, res) => {
+    res.render("dashboard", {type: "patient"})
+})
 
 router.get("/chat")
 
