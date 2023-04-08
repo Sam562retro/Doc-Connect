@@ -4,7 +4,7 @@
   "description": "A place for doctors to create self-employment",
   "main": "app.js",
   "scripts": {
-    "test": "nodeman app.js"
+    "test": "nodemon app.js"
   },
   "author": "Soham Gupta",
   "license": "ISC",
@@ -13,7 +13,7 @@
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "express-sessions": "^1.0.6",
+    "express-session": "^1.17.3",
     "mongoose": "^7.0.3"
   },
   "devDependencies": {
