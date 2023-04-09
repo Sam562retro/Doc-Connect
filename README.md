@@ -1,4 +1,4 @@
-# ![logo](https://github.com/Sam562retro/Doc-Connect/blob/master/public/DocConnect.png?raw=true) DocConnect - Your health, Our health
+# DocConnect <img src="https://github.com/Sam562retro/Doc-Connect/blob/master/public/DocConnect.png?raw=true"  width="30">  - Your health, Our healthDocConnect - Your health, Our health
 
 
 # Admin-Credientials 🔑
