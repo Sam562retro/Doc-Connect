@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/hospHome.css">
+<div class="details">
+    <div class="container container-show">
+        <div class="display">
+            <img src="<%= hospitalData.image %>" alt="">
+            <div class="subheading subheading-show">
+                <%= hospitalData.name %>
+            </div>
+        </div>
+        <div class="info info-show">
+            <span class="tag"><%= hospitalData.email %></span>
+            <span class="tag"><%= hospitalData.phone %></span>
+            <span class="tag"><%= hospitalData.address %></span>
+        </div>
+    </div>
+    <div class="bookRoom row bookRoom-show">
+        <div class="facilities align-left">
+            <div class="facilities-show">
+                <div class="subheading2 subheading2-show">
+                    Facilities
+                </div>
+                <div class="container2 container2-show">
+                    <span class="tag marginR"><%= hospitalData.roomData %></span>
+                </div>
+            </div>
+            <div class="price price-show">
+                Price of the Room:
+                <span style="margin-top: 1vh;" class="tag">Rs.<%= hospitalData.fare %> per hour</span>
+            </div>
+        </div>
+    </div>

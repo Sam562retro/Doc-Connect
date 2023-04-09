@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+:root {
+    --bg: #B2D4EA;
+    --accent-1: #2B4E6B;
+    --aceent-2: #B9D7D9;
+    --text: #D9D9D9;
+}
+
+*{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-family: poppins;
+}
+
+body{
+    background-color: var(--bg);
+    overflow-x: hidden;
+}
+
+.mainContent{
+    min-width: 100vw;
+    min-height: 100vh;
+    padding: 9vh 0 0 21vw !important;
+}
+
+.heading-2{
+    font-size: 5vh;
+}
+
+.cardBox{
+    padding: 10vh 10vw 10vh 0;
+}
+
+.card{
+    width: 100%;
+    height: 30vh;
+    background-color: whitesmoke !important;
+    padding: 1vh 0.5vw;
+    transition: all 300ms ease-in-out;
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    margin-bottom: 7vw;
+}
+
+.card:hover{
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    cursor: pointer;
+}
+
+.name{
+    font-family: bebas neue;
+    font-size: 2vw;
+    letter-spacing: 4px;
+    height: 100%;
+    padding-right: 3vw;
+    border-right: black 1px solid;
+}  
+
+
+.tag {
+    padding: 0.3vw 0.6vw;
+    font-size: 1vw !important;
+    margin: 0.2vw;
+    border-radius: 15px;
+    border: #404952 solid 2px;
+    transition: all ease-in-out 100ms;
+    width: max-content;
+}
+
+.tag:hover {
+    cursor: pointer;
+    border: solid 2px #404952;
+    background-color: rgba(179, 179, 179, 0.992);
+}
+
+.details{
+    padding-left: 4vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.note{
+    width: 100%;
+    height: 100%;
+    margin-left: 2vw;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    text-align: justify;
+    padding: 1vw;
+    border: #40495251 1px solid;
+}
+
+.note > span{
+    font-size: 2vw;
+}
+
+.note > p{
+    font-family: bebas neue;
+    /* letter-spacing: 2px; */
+    font-size: 1.2vw;
+}
+
+.buttons{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translatex(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height ease-out 2s;
+    transition: bottom ease-out 600ms;
+    min-height: 0vh;
+    max-height: 0vh;
+}
+
+.button{
+    width: 10vw;
+    height: 5vh;
+    font-size: 1.2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    font-family: oswald;
+    letter-spacing: 3px;
+    transition: all 300ms ease-in-out;
+    transition: font-size 100ms ease-out;
+}
+
+.button:active{
+    font-size: 1vw;
+}
+
+.button:nth-child(1){
+    transition: all 150ms ease-in-out;
+    margin-right: 1vw;
+    background-color: #28a745;
+}
+
+.button:nth-child(1):hover{
+    transition: all 150ms ease-in-out;
+    background-color: #0d6922;
+    color: white;
+}
+
+.button:nth-child(2){
+    background-color: #dc3545;
+    transition: all 150ms ease-in-out;
+}
+
+.button:nth-child(2):hover{
+    transition: all 150ms ease-in-out;
+    background-color: #5e0f17;
+    color: white;
+}
+
+.card:hover .buttons{
+    overflow: visible;
+    min-height: 14vh;
+    max-height: 14vh;
+    bottom: -7vh;
+}

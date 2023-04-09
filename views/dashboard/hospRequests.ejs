@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/hospRequests.css" >
+<% if(roomReq.length != 0){ %>
+<div class="heading-2">
+    Your recent room requests
+</div>
+<div class="cardBox">
+        <% roomReq.forEach((pat, index) => { %>
+        <div class="card">
+            <div class="details">
+                <span class="tag">Date: <%= pat[0] %></span>
+                <span class="tag">Time: <%= pat[1] %></span>
+                <span class="tag">Doctor: <%= pat[3] %></span>
+            </div>
+            <div class="note">
+                <span>Note :</span>
+                <p><%= pat[2] %></p>
+            </div>
+            <div class="buttons">
+                <div class="button" onclick="location.href='/hospital/requests/accept/<%= index %>'">
+                    Accept
+                </div>
+                <div class="button" onclick="location.href='/hospital/requests/reject/<%= index %>'">
+                    Reject
+                </div>
+            </div>
+        </div>
+        <%})%>
+    </div>
+<%}else{%>
+    <style>
+        .mainContent{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    </style>
+    <h3>No requests Right Now</h3>
+<%}%>

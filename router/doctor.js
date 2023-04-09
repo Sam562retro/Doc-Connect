@@ -26,12 +26,14 @@ router.get("/rooms/:id", (req, res) => {
 
 router.post("/rooms/:id", (req, res) => {
     hospSchema.findById(req.params.id).select({name:0, password: 0, phone: 0, email: 0, roomData: 0, fare: 0, address:0, image: 0}).then(hosp => {
-        var n = hosp.RoomReq
-        obj = [req.body.date, req.body.time, req.body.textForPatient, req.session.userid]
-        n.push(obj)
-        hospSchema.findByIdAndUpdate(req.params.id, {RoomReq: n}, {new: true}).then(ret => {
-            res.redirect("/doctor/rooms")
-        }).catch(err => {console.log(err);res.send(err);})
+        docSchema.findById(req.session.userid).select({password: 0, phone: 0, email: 0, fare: 0}).then(doc => {
+            var n = hosp.RoomReq
+            obj = [req.body.date, req.body.time, req.body.textForPatient, doc.name, req.body.patient]
+            n.push(obj)
+            hospSchema.findByIdAndUpdate(req.params.id, {RoomReq: n}, {new: true}).then(ret => {
+                res.redirect("/doctor/rooms")
+            }).catch(err => {console.log(err);res.send(err);})
+        }).catch(err => {console.log(err);res.send(err);})  
     }).catch(err => {console.log(err);res.send(err);})
 })
 
@@ -47,8 +49,8 @@ router.get("/requests/accept/:index", (req, res) => {
         var x = docData.PatientReq
 
         patSchema.findByIdAndUpdate(x[req.params.index][5], {doc: docData._id}).catch(err => {res.send(err)})
-
-        x = x.filter(item => item != x[req.params.index])
+        var z = x[req.params.index]
+        x = x.filter(item => item != z)
 
         docSchema.findByIdAndUpdate(req.session.userid, {PatientReq: x}).catch(err => {res.send(err)})
         res.redirect("/doctor/patients")
@@ -59,7 +61,8 @@ router.get("/requests/accept/:index", (req, res) => {
 router.get("/requests/reject/:index", (req, res) => {
     docSchema.findById(req.session.userid).then(docData => {
         var x = docData.PatientReq
-        x.splice(req.params.index, 1);
+        var z = x[req.params.index]
+        x = x.filter(item => item != z)
         docSchema.findByIdAndUpdate(req.session.userid, {PatientReq: x}).catch(err => res.send(err))
         res.redirect("/doctor/requests")
     }).catch(err => {res.send(err)})
