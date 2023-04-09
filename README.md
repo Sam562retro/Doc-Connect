@@ -1,4 +1,4 @@
-# ![logo](https://imgur.com/a/jBScnvp) DocConnect - Your health, Our health
+# DocConnect <img src="https://github.com/Sam562retro/Doc-Connect/blob/master/public/DocConnect.png?raw=true"  width="30">  - Your health, Our healthDocConnect - Your health, Our health
 
 
 # Admin-Credientials 🔑
@@ -52,14 +52,14 @@ Therefore, we believe that if we are able to introduce this app on a large scale
 -   We were also able to enhance our imagination and use our creativity to solve some major problems of our country allowing us to use our programming skill to help other people.
 -   One of the major things we learned from this was team work. Some of us had little experience with back-end development and making a proper webapp. So, we collaborated and helped each other to get all the features working and complete our web development project in time.
 
-# WHAT’S NEXT FOR DocConect
+# WHAT’S NEXT ❓
 
 - In coming future we look forward to expand our website considering if we get some funds and acknowledgment and would add features such as:
 	- Ai diagnosis
 	- Location search
 	- Online pharmacy
 
-# Built with
+# Built with 🔩
 
 - Html
 - Css
@@ -69,3 +69,5 @@ Therefore, we believe that if we are able to introduce this app on a large scale
 - Express
 - Body Parsor
 - EJS
+
+---
