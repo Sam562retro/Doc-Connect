@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="/css/patients.css">
+<div class="heading-2">
+    Patients
+</div>
+<div class="searchDiv">
+    <div class="search">
+        <i style="font-size: 1.3vw; margin: 0 0.5vw; color: black;" class="bi bi-search"></i>
+        <input type="text" id="input" onkeyup="search()" placeholder="Search for patients.."
+            title="Type in a name">
+    </div>
+</div>
+<div class="cardBox">
+    <% if(pats.length != 0){ %>
+        <% pats.forEach(pat => { %>
+        <div class="card">
+            <a href="" class="a"><%= pat.name %></a>
+            <div class="nameCard">
+                <%= pat.name %>
+            </div>
+            <div class="details">
+                <span class="tag">Phone No: <%= pat.phone %></span>
+                <span class="tag">Age: <%= pat.age %></span>
+                <span class="tag">Gender: <%= pat.gender %></span>
+            </div>
+            <div class="buttons">
+            <button class="tag button" onclick="location.href='/doctors/patients/prescription/<%= pat._id %>'">Prescription</button>
+            <button class="tag button" onclick="location.href='/doctors/patients/chat/<%= pat._id %>'">Chat</button>
+            <button class="tag button" onclick="location.href='/doctors/patients/room/<%= pat._id %>'">Room Details</button>
+            </div>
+        </div>
+        <% }) %>
+    <%}else{%>
+        <style>
+            .mainContent{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+        </style>
+        <h3>Choose action using sidepanel</h3>
+    <%}%>
+</div>
+
+<script>
+    function search() {
+        var input, filter, li, a, i, txtValue;
+        input = document.getElementById("input");
+        filter = input.value.toUpperCase();
+        li = document.getElementsByClassName("card");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByClassName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "flex";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>

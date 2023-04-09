@@ -1,30 +1,42 @@
 <link rel="stylesheet" href="/css/patientRequests.css" >
+<% if(patReq.length != 0){ %>
 <div class="heading-2">
     Your recent checkup requests
 </div>
 <div class="cardBox">
-    <% patReq.forEach((pat, index) => { %>
-    <div class="card">
-        <div class="name">
-            <%= pat[0] %>
-        </div>
-        <div class="details">
-            <span class="tag">Phone No: <%= pat[3] %></span>
-            <span class="tag">Age: <%= pat[2] %></span>
-            <span class="tag">Gender: <%= pat[1] %></span>
-        </div>
-        <div class="note">
-            <span>Note :</span>
-            <p><%= pat[4] %></p>
-        </div>
-        <div class="buttons">
-            <div class="button" onclick="location.href='/doctor/requests/accept/<%= index %>'">
-                Accept
+        <% patReq.forEach((pat, index) => { %>
+        <div class="card">
+            <div class="name">
+                <%= pat[0] %>
             </div>
-            <div class="button" onclick="location.href='/doctor/requests/reject/<%= index %>'">
-                Reject
+            <div class="details">
+                <span class="tag">Phone No: <%= pat[3] %></span>
+                <span class="tag">Age: <%= pat[2] %></span>
+                <span class="tag">Gender: <%= pat[1] %></span>
+            </div>
+            <div class="note">
+                <span>Note :</span>
+                <p><%= pat[4] %></p>
+            </div>
+            <div class="buttons">
+                <div class="button" onclick="location.href='/doctor/requests/accept/<%= index %>'">
+                    Accept
+                </div>
+                <div class="button" onclick="location.href='/doctor/requests/reject/<%= index %>'">
+                    Reject
+                </div>
             </div>
         </div>
+        <%})%>
     </div>
-    <%})%>
-</div>
+<%}else{%>
+    <style>
+        .mainContent{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    </style>
+    <h3>Choose action using sidepanel</h3>
+<%}%>

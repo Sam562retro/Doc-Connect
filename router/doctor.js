@@ -25,25 +25,41 @@ router.get("/requests", (req, res) => {
     })
 })
 
-router.get("/doctor/requests/accept/:index", (req, res) => {
+router.get("/requests/accept/:index", (req, res) => {
     docSchema.findById(req.session.userid).then(docData => {
         var x = docData.PatientReq
-        var y = x[req.params.index]
-        
-        patSchema.findByIdAndUpdate(x[5], {doc: docData._id}).catch(err => {res.send(err)})
+
+        patSchema.findByIdAndUpdate(x[req.params.index][5], {doc: docData._id}).catch(err => {res.send(err)})
+
+        x = x.filter(item => item != x[req.params.index])
+
+        docSchema.findByIdAndUpdate(req.session.userid, {PatientReq: x}).catch(err => {res.send(err)})
+        res.redirect("/doctor/patients")
+
+    }).catch(err => {res.send(err)})
+})
+
+router.get("/requests/reject/:index", (req, res) => {
+    docSchema.findById(req.session.userid).then(docData => {
+        var x = docData.PatientReq
+        x.splice(req.params.index, 1);
+        docSchema.findByIdAndUpdate(req.session.userid, {PatientReq: x});
+        res.redirect("/doctor/requests")
+    }).catch(err => {res.send(err)})
+})
+
+router.get("/patients", (req, res) => {
+    patSchema.find({doc : req.session.userid}).select({password: 0, location: 0, prescriptions :0, chat :0}).then(pats => {
+        res.render("dashboard", {type: "doctor", subType: "patientsDisplay", pats})
     })
 })
 
-router.get("/doctor/requests/reject/:index", (req, res) => {
-    
+router.get("/patients/prescription/:id", (req, res) => {
+    res.render("dashboard", {type: "doctor", subType: "prescribe"})
 })
 
-router.get("/patients")
+router.get("/patients/chat/:id")
 
-router.get("/patients/:id/chat")
-
-router.get("/patients/:id/prescription")
-
-router.get("/patients/:id/room")
+router.get("/patients/room/:id")
 
 module.exports = router;

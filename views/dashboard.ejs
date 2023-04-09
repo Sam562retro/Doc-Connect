@@ -47,7 +47,7 @@
                 <i class="bi bi-question-circle icon"></i> 
                 <span>Checkup Requests</span>
             </div>
-            <div class="item">
+            <div class="item" onclick="location.href='/doctor/patients'">
                 <i class="bi bi-person-badge icon"></i> 
                 <span>Your Patients</span>
             </div>
@@ -88,6 +88,21 @@
         <%- include('dashboard/bookDoctor') %>
     <%}else if(subType == "req"){%>
         <%- include('dashboard/patientRequests') %>
+    <%}else if(subType == "patientsDisplay"){%>
+        <%- include('dashboard/patients') %>
+    <%}else if(subType == "prescribe"){%>
+        <%- include('dashboard/prescribe') %>
+    <%}else{%>
+        <style>
+            .mainContent{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background-color: #B2D4EA;
+            }
+        </style>
+        <h3>Choose action using sidepanel</h3>
     <%}%>
 </div>
 

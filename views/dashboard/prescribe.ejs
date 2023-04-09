@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/css/prescribe.css">
+
+<div class="heading-2">
+    Prescription
+</div>
+<div class="cardBox">
+    <div class="card" id="card">
+        <div class="container medicine">
+            <input class="input" onclick="labelMove()" class="email" type="email" id="email">
+            <label id="Elabel" class="label">Medicine</label>
+        </div>
+        <div class="info">
+            <div class="dates">
+                <div class="date">
+                    <input type="date">
+                    <label id="Elabel" class="">From Date</label>
+                </div>
+                <div class="date">
+                    <input type="date">
+                    <label id="Elabel" class="">To Date</label>
+                </div>
+            </div>
+            <div class="container schedule">
+                <input class="input" onclick="labelMove()" class="email" type="email" id="email">
+                <label id="Elabel" class="label">Schedule</label>
+            </div>
+        </div>
+        <div class="note">
+            <span>Note:</span>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+</div>
+<button id="add" onclick="add()" class="addMedicine"><i class="bi bi-plus-circle"></i></button>
+
+
+<script>
+    function add() {
+        var elem = document.querySelector('#card');
+        var clone = elem.cloneNode(true);
+        clone.id = 'card2';
+        clone.classList.add('card');
+        elem.after(clone);
+    }
+</script>
