@@ -1,0 +1,46 @@
+    <link rel="stylesheet" href="/css/browseDoctors.css">
+        <div class="searchDiv">
+            <div class="search">
+                <i style="font-size: 1.3vw; margin: 0 0.5vw; color: black;" class="bi bi-search"></i>
+                <input type="text" id="input" onkeyup="search()" placeholder="Search for hospitals.."
+                    title="Type in a name">
+            </div>
+        </div>
+        <div class="cardBox">
+            <% docList.forEach(doc => { %>
+                <div class="cardBox">
+                    <div class="card">
+                        <a href="" class="a"><%= doc.name %></a>
+                        <div class="nameCard">
+                            <%= doc.name %>
+                        </div>
+                        <div class="details">
+                            <span class="tag">Phone No: <%= doc.phone %></span>
+                            <span class="tag">Email: <%= doc.email %></span>
+                            <span class="tag">Price: Rs.<%= doc.fare %> per hour</span>
+                        </div>
+                        <div class="buttons">
+                           <button class="tag button" onclick="location.href=('/patient/book/<%= doc._id %>')">Request Checkup</button>
+                        </div>
+                    </div>
+                </div>
+            <%})%>
+        </div>
+
+    <script>
+        function search() {
+            var input, filter, li, a, i, txtValue;
+            input = document.getElementById("input");
+            filter = input.value.toUpperCase();
+            li = document.getElementsByClassName("card");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByClassName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "flex";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>

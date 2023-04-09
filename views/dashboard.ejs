@@ -38,28 +38,55 @@
         <i class="bi bi-menu-app Bi"></i>
     </div>
     <div class="list">
-        <div class="item">
-            <i class="bi bi-hospital icon"></i>
-            <span>Browse Hospitals</span>
-        </div>
-        <div class="item">
-            <i class="bi bi-question-circle icon"></i> 
-            <span>Checkup Requests</span>
-        </div>
-        <div class="item">
-            <i class="bi bi-person-badge icon"></i> 
-            <span>Your Patients</span>
-        </div>
+        <% if(type == "doctor"){ %>
+            <div class="item" onclick="location.href='/doctor/rooms'">
+                <i class="bi bi-hospital icon"></i>
+                <span>Browse Hospitals</span>
+            </div>
+            <div class="item" onclick="location.href='/doctor/rooms'">
+                <i class="bi bi-question-circle icon"></i> 
+                <span>Checkup Requests</span>
+            </div>
+            <div class="item">
+                <i class="bi bi-person-badge icon"></i> 
+                <span>Your Patients</span>
+            </div>
+        <%}else if(type == "hospital"){%>
+            <div class="item">
+                <i class="bi bi-hospital icon"></i>
+                <span>Edit Details</span>
+            </div>
+            <div class="item">
+                <i class="bi bi-question-circle icon"></i> 
+                <span>Room Requests</span>
+            </div>
+        <%}else if(type == "patient" && subType == "patHome"){%>
+            <div class="item">
+                <i class="bi bi-hospital icon" onclick="location.href=('/patient/')"></i>
+                <span>Browse Doctors</span>
+            </div>
+        <%}else if(type == "patient" && subType == "bookDoc"){%>
+            <div class="item">
+                <i class="bi bi-hospital icon" onclick="location.href=('/patient/')"></i>
+                <span>Browse Doctors</span>
+            </div>
+        <%}%>
     </div>
 </div>
-    <button class="logOut item">
+    <button class="logOut item" onclick="location.href=('/logout')">
         <i class="bi bi-door-open icon"></i>
         <span>Log out</span>
     </button>
 </div>
 
-<div class="mainContent">
-    
+<div class="mainContent" style="padding: 7vh 0 0 18vw;">
+    <%if(subType == "roomBrowse"){%>
+        <%- include('dashboard/browseHospitals') %>
+    <%}else if(subType == "patHome"){%>
+        <%- include('dashboard/browseDoctors') %>
+    <%}else if(subType == "bookDoc"){%>
+        <%- include('dashboard/bookDoctor') %>
+    <%}%>
 </div>
 
 </body>

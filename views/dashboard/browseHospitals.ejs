@@ -1,98 +1,46 @@
-    <link rel="stylesheet" href="/css/browseHospitals">
-    <div class="searchDiv">
-        <div class="search">
-            <i style="font-size: 1.3vw; margin: 0 0.5vw; color: black;" class="bi bi-search"></i>
-            <input type="text" id="input" onkeyup="search()" placeholder="Search for hospitals.."
-                title="Type in a name">
-        </div>
-    </div>
-    <div class="cardBox">
-        <div class="card">
-            <a href="" class="a">Max Hospital</a>
-            <div class="img">
-                <img src="max.jpeg" alt="">
-            </div>
-            <div class="details">
-                <div class="subheading">
-                    Max Hospital
-                    <button class="button">
-                        Book
-                    </button>
-                </div>
-                <div class="info">
-                    <div class="price col-sm-4"
-                        style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">Price<span
-                            class="tag">₹10,000</span>
-                    </div>
-                    <div class="others col-sm-4"
-                        style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">Facilities</div>
-                    <div class="contact col-sm-4"
-                        style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">
-                        Contact
-                        <span class="tag">max@gmail.com</span>
-                        <span class="tag">9810981298</span>
-                        <span class="tag">New Delhi, Pusa road</span>
-                    </div>
-                </div>
+    <link rel="stylesheet" href="/css/browseHospitals.css">
+        <div class="searchDiv">
+            <div class="search">
+                <i style="font-size: 1.3vw; margin: 0 0.5vw; color: black;" class="bi bi-search"></i>
+                <input type="text" id="input" onkeyup="search()" placeholder="Search for hospitals.."
+                    title="Type in a name">
             </div>
         </div>
-        <div class="card">
-            <a href="" class="a">Gangaram Hospital</a>
-            <div class="img">
-                <img src="max.jpeg" alt="">
-            </div>
-            <div class="details">
-                <div class="subheading">Gangaram Hospital
-                    <button class="button">
-                        Book
-                    </button>
-                </div>
-                <div class="info">
-                    <div class="price col-sm-4"
-                        style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">Price<span
-                            class="tag">₹10,000</span>
+        <div class="cardBox">
+            <% hospData.forEach(hosp => { %>
+                <div class="card">
+                    <a href="" class="a"><%= hosp.name %></a>
+                    <div class="img">
+                        <img src="<%= hosp.image %>" alt="hospital pic">
                     </div>
-                    <div class="others col-sm-4"
-                        style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">Facilities</div>
-                    <div class="contact col-sm-4"
-                        style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">
-                        Contact
-                        <span class="tag">max@gmail.com</span>
-                        <span class="tag">9810981298</span>
-                        <span class="tag">New Delhi, Pusa road</span>
+                    <div class="details">
+                        <div class="subheading">
+                            <%= hosp.name %>
+                            <button class="button" onclick="location.href=('/rooms/<%= hosp._id %>')">
+                                Book
+                            </button>
+                        </div>
+                        <div class="info">
+                            <div class="price col-sm-4"
+                                style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">Price<span
+                                    class="tag">Rs.<%= hosp.fare %> per hour</span>
+                            </div>
+                            <div class="others col-sm-4"
+                                style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">Facilities
+                                <span class="tag"><%= hosp.roomData %></span>
+                            </div>
+                            <div class="contact col-sm-4"
+                                style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">
+                                Contact
+                                <span class="tag"><%= hosp.email %></span>
+                                <span class="tag"><%= hosp.phone %></span>
+                                <span class="tag"><%= hosp.address %></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <%})%>
         </div>
-        <div class="card">
-            <a href="" class="a">idk Hospital</a>
-            <div class="img">
-                <img src="max.jpeg" alt="">
-            </div>
-            <div class="details">
-                <div class="subheading">idk Hospital
-                    <button class="button">
-                        Book
-                    </button>
-                </div>
-                <div class="info">
-                    <div class="price col-sm-4"
-                        style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">Price<span
-                            class="tag">₹10,000</span>
-                    </div>
-                    <div class="others col-sm-4"
-                        style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">Facilities</div>
-                    <div class="contact col-sm-4"
-                        style="font-weight: 600; font-size: 1.7vw; font-family: Roboto mono;">
-                        Contact
-                        <span class="tag">max@gmail.com</span>
-                        <span class="tag">9810981298</span>
-                        <span class="tag">New Delhi, Pusa road</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
         function search() {

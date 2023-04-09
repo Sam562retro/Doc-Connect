@@ -20,7 +20,7 @@ const docSchema = new mongoose.Schema({
     },
     PatientReq:{
         required: true,
-        type:[[String, Boolean]],
+        type:[[String, String, Number, String]],
         default:[]
     },
     location:{
@@ -34,6 +34,10 @@ const docSchema = new mongoose.Schema({
     mdms:{
         required: true,
         type: String
+    }, 
+    fare:{
+        type: Number,
+        required: true
     }
 });
 

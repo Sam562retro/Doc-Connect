@@ -58,7 +58,7 @@ app.use('/doctor', (req,res,next) => {
         res.locals.userSession = true;
         next()
     }else{
-        res.redirect('/login')
+        res.redirect('/logreg')
     }
 })
 
@@ -68,7 +68,7 @@ app.use('/hospital', (req,res,next) => {
         res.locals.userSession = true;
         next()
     }else{
-        res.redirect('/login')
+        res.redirect('/logreg')
     }
 })
 
@@ -78,7 +78,7 @@ app.use('/patient', (req,res,next) => {
         res.locals.userSession = true;
         next()
     }else{
-        res.redirect('/login')
+        res.redirect('/logreg')
     }
 })
 
@@ -147,7 +147,8 @@ app.post("/register", (req, res) => {
             password : req.body.password,
             phone : req.body.mobile,
             email : req.body.email,
-            location: [req.body.latitude,req.body.longitude]
+            location: [req.body.latitude,req.body.longitude],
+            fare : req.body.fare
         }
 
         const fileName = randomstring.generate() + req.files.mbbs.name;
