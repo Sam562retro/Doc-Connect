@@ -20,7 +20,7 @@ const hospSchema = new mongoose.Schema({
     },
     RoomReq:{
         required: true,
-        type:[[String, Boolean]],
+        type:[[String, String, String, String, String]],
         default:[]
     },
     roomData:{

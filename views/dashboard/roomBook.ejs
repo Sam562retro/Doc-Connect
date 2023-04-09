@@ -1,0 +1,52 @@
+        <link rel="stylesheet" href="/css/roomBook.css">
+        <img src="<%= hosp.image %>" alt="" class="hospitalImg">
+        <div class="details">
+            <div class="container">
+                <div class="subheading">
+                    <%= hosp.name %>
+                </div>
+                <div class="info">
+                    <span class="tag"><%= hosp.email %></span>
+                    <span class="tag"><%= hosp.phone %></span>
+                    <span class="tag"><%= hosp.address %></span>
+                </div>
+            </div>
+            <div class="bookRoom row">
+
+                <form class="form col-sm-10" method="POST" action="/doctor/rooms/<%= hosp._id %>">
+                    <div class="subheading2">Book Room here</div>
+                    <div class="dates">
+                        <div class="date">
+                            <input type="date" name="date">
+                            <label id="Elabel">Date</label>
+                        </div>
+                        <div class="date">
+                            <input type="time" name="time">
+                            <label id="Elabel">Time</label>
+                        </div>
+                    </div>
+                    <textarea name="textForPatient" placeholder="Why do you want to book room ?" cols="30" rows="10"></textarea>
+                    <select name="patient">
+                        <option selected disabled>Select The Patient You Want Room For</option>
+                        <% pats.forEach(pat => { %>
+                            <option value="<%= pat._id %>"><%= pat.name %></option>
+                        <% }) %>
+                    </select>
+                    <input type="submit" class="reqBtn" value='Request Room'>
+                </form>
+
+                <div class="facilities col-sm-2">
+                    <div style="padding: 2vw;">
+                        <div class="subheading2">
+                            Facilities
+                        </div>
+                        <div class="container2">
+                            <span class="tag"><%= hosp.roomData %></span>
+                        </div>
+                    </div>
+                    <div class="price">
+                        Price of the Room:
+                        <span style="margin-top: 1vh;" class="tag">Rs.<%= hosp.fare %> per hour</span>
+                    </div>
+                </div>
+            </div>

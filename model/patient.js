@@ -32,6 +32,11 @@ const patSchema = new mongoose.Schema({
         type: String,
         default: false
     },
+    room:{
+        required: true,
+        type: String,
+        default: false
+    },
     prescriptions:{
         required: true,
         type: [[[String, String]]],

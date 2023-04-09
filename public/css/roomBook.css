@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+:root {
+    --bg: #B2D4EA;
+    --accent-1: #2B4E6B;
+    --aceent-2: #B9D7D9;
+    --text: #D9D9D9;
+}
+
+*{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-family: poppins;
+}
+
+body{
+    overflow: hidden;
+}
+
+.mainContent{
+    width: 100vw;
+    padding: 6vh 0 0 17vw !important;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text);
+} 
+
+.hospitalImg{
+    min-width: 88vw;
+    filter: brightness(30%) blur(5px) ;
+    box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
+    margin: 0;
+}
+
+.details{
+    position: absolute;
+    padding: 4vw 8vw 7vw 4vw;
+    width: 88vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subheading{
+    font-family: mouse memoirs;
+    font-size: 3vw;
+    padding-right: 4vw;
+    border-right: whitesmoke 1px solid;
+}
+
+.info{
+    padding-left: 4vw;
+}
+
+
+.tag {
+    padding: 0.3vw 0.6vw;
+    width: max-content;
+    height: max-content;
+    font-size: 1vw !important;
+    margin: 0.2vw;
+    border-radius: 15px;
+    border: #a3b2c2 solid 2px;
+    transition: all ease-in-out 100ms;
+}
+
+.tag:hover {
+    cursor: pointer;
+    border: solid 2px #68737e;
+    background-color: rgba(39, 39, 39, 0.992);
+}
+
+.bookRoom{
+    margin-top: 8vh !important;
+    border: whitesmoke 1px solid;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-right: 1px solid whitesmoke;
+    padding: 2vw !important;
+}
+
+.facilities{
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subheading2{
+    font-size: 2vw;
+    font-family: oswald;
+    margin-bottom: 0;
+}
+
+.container2{
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    margin-top: 5vh;
+}
+
+textarea{
+    margin-top: 5% !important;
+    width: 50%;
+    height: 20vh;
+    border-radius: 20px;
+    padding: 1vh 1vw;
+}
+
+
+.dates{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 5%;
+}
+
+#Elabel{
+    font-size: 1.7vh;
+    color: var(--text);
+    pointer-events: none;
+}
+
+.date{
+    display: flex;
+    flex-direction: column-reverse;
+    margin-right: 1vw;
+}
+
+.date > input{
+    width: 8vw;
+    padding: 1vh 1vw;
+    border-radius: 10px;
+    border: transparent;
+}
+
+.price{
+    border-top: 1px whitesmoke solid;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.reqBtn{
+    margin-top: 5vh;
+    width: 13vw;
+    height: 5vh;
+    font-size: 1.1vw;
+    border-radius: 10px;
+    border: 1px solid whitesmoke;
+    color: var(--text);
+    background-color: transparent;
+    transition: all 150ms ease-in-out;
+}
+
+.reqBtn:hover{
+    cursor: pointer;
+    border: solid 2px #68737e;
+    background-color: rgba(39, 39, 39, 0.992);
+}
+
+.reqBtn:active{
+    font-size: 0.9vw;
+}
+
+.facilities-show{
+    display: flex;
+    flex-direction: row;
+    padding: 2vw;
+    padding: 0 !important;
+    height: 100%;
+}
+
+.subheading2-show{
+    border-right: whitesmoke 1px solid;
+    display: flex;
+    align-items: center;
+    margin-left: 3vw;
+    height: 100%;
+    padding-right: 4vw;
+}
+
+
+.align-left{
+    flex-direction: row !important;
+}
+
+.container2-show{
+    padding-left: 4vw;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0 !important;
+}
+
+.marginR{
+    margin-right: 2vw;
+}
+
+.price-show{
+    border-top: 0px !important;
+    border-left: 1px solid whitesmoke;
+    width: max-content;
+    padding: 0 4vw;
+    height: 100%;
+    font-size: 1.4vw;
+}
+
+.bookRoom-show{
+    height: 40%;
+}
+
+.hospitalImg-show{
+    display: none;
+}
+
+.mainContent-show{
+    background-color: rgba(0, 0, 0, 0.544);
+}
+
+.subheading-show{
+    border-left: 1px solid whitesmoke;
+    padding: 0 4vw;
+    border-right: 0;
+}
+
+.container-show{
+    flex-direction: column;
+}
+
+.info-show{
+    margin-top: 5vh;
+}
+
+.display{
+    display: flex ;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.display img{
+    margin-right: 4vw;
+    width: 20%;
+}
+
+select{
+    width: 29vw;
+    padding: 1vh 1vw;
+    border-radius: 10px;
+    border: transparent;
+    margin: 1vh 1vw;
+
+}

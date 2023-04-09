@@ -105,7 +105,7 @@ app.post("/login", (req, res) => {
             }
         }).catch(err => {
             console.log(err)
-            res.redirect("/")
+            res.redirect("/logreg")
         })
     }else if(req.body.type == "patient"){
         patSchema.find({phone: req.body.mobile, password: req.body.password})
@@ -119,7 +119,7 @@ app.post("/login", (req, res) => {
             }
         }).catch(err => {
             console.log(err)
-            res.redirect("/")
+            res.redirect("/logreg")
         })
     }else if(req.body.type == "hospital"){
         hospSchema.find({phone: req.body.mobile, password: req.body.password})
@@ -133,7 +133,7 @@ app.post("/login", (req, res) => {
             }
         }).catch(err => {
             console.log(err)
-            res.redirect("/")
+            res.redirect("/logreg")
         })
     }else{
         res.redirect("/logreg")
