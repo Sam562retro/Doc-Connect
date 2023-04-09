@@ -32,7 +32,7 @@ const patSchema = require("./model/patient")
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 const connection = () => {
-    mongoose.connect('mongodb+srv://gsoham562:O3tkapzWXLA7bBBB@docconnect.t2ej7t6.mongodb.net/?retryWrites=true&w=majority', {
+    mongoose.connect('mongodb+srv://gsoham562:87oduHKBprs86dIo@docconnect.t2ej7t6.mongodb.net/?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
