@@ -1,4 +1,4 @@
-# ![logo](https://imgur.com/a/jBScnvp) DocConnect - Your health, Our health
+# ![logo](https://github.com/Sam562retro/Doc-Connect/blob/master/public/DocConnect.png?raw=true) DocConnect - Your health, Our health
 
 
 # Admin-Credientials 🔑
