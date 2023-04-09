@@ -43,7 +43,7 @@
                 <i class="bi bi-hospital icon"></i>
                 <span>Browse Hospitals</span>
             </div>
-            <div class="item" onclick="location.href='/doctor/rooms'">
+            <div class="item" onclick="location.href='/doctor/requests'">
                 <i class="bi bi-question-circle icon"></i> 
                 <span>Checkup Requests</span>
             </div>
@@ -86,6 +86,8 @@
         <%- include('dashboard/browseDoctors') %>
     <%}else if(subType == "bookDoc"){%>
         <%- include('dashboard/bookDoctor') %>
+    <%}else if(subType == "req"){%>
+        <%- include('dashboard/patientRequests') %>
     <%}%>
 </div>
 

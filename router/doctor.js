@@ -3,7 +3,8 @@ const router = express.Router();
 
 const docSchema = require("./../model/doctor")
 const hospSchema = require("./../model/hospital")
-const patSchema = require("./../model/patient")
+const patSchema = require("./../model/patient");
+const patient = require('./../model/patient');
 
 router.get("/", (req, res) => {
     res.render("dashboard", {type: "doctor", subType:"docHome"})
@@ -24,9 +25,20 @@ router.get("/requests", (req, res) => {
     })
 })
 
-router.get("/patients")
+router.get("/doctor/requests/accept/:index", (req, res) => {
+    docSchema.findById(req.session.userid).then(docData => {
+        var x = docData.PatientReq
+        var y = x[req.params.index]
+        
+        patSchema.findByIdAndUpdate(x[5], {doc: docData._id}).catch(err => {res.send(err)})
+    })
+})
 
-router.get("/patients/:id")
+router.get("/doctor/requests/reject/:index", (req, res) => {
+    
+})
+
+router.get("/patients")
 
 router.get("/patients/:id/chat")
 

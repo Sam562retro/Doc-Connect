@@ -35,7 +35,7 @@ router.get('/book/:id', (req, res) => {
 
 router.post('/book/:id', (req, res) => {
     patSchema.findById({_id: req.session.userid}).select({password: 0, chat: 0, doc:0, prescriptions: 0, location: 0}).then(pat => {
-        obj = [pat.name, pat.gender, pat.age, req.body.note]
+        obj = [pat.name, pat.gender, pat.age, pat.phone, req.body.note, pat._id]
         docSchema.findById(req.params.id).select({name:0, password: 0, phone: 0, email: 0, location: 0, mbbs: 0, mdms: 0, fare: 0}).then(doc => {
             var n = doc.PatientReq
             n.push(obj)
