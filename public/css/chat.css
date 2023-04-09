@@ -1,0 +1,108 @@
+:root {
+    --bg: #B2D4EA;
+    --accent-1: #2B4E6B;
+    --aceent-2: #B9D7D9;
+    --text: #D9D9D9;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.mainContent {
+    min-width: 100vw;
+    min-height: 100vh;
+    padding: 7vh 0 0 18vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header{
+    width: 82vw;
+    height: 7vh;
+    background-color: #3868909f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2vw;
+    font-size: 1.8vw;
+    font-family: bebas neue;
+}
+
+.bi-arrow-left-square-fill{
+    font-family: 1.9vw;
+    cursor: pointer;
+}
+
+.chatBox{
+    height: 79vh;
+    width: 82vw;
+    background-color: var(--bg);
+    display: flex;
+    flex-direction: column;
+}
+
+.msg{
+    height: 5vh;
+    width: 82vw;
+    padding: 5vh 3vw;
+    display: flex;
+    align-items: center;
+}
+.msgBox{
+    background-color: rgba(245, 245, 245, 0.596);
+    width: max-content;
+    height: max-content;
+    border-radius: 10px;
+    padding: 1vh 1vw;
+}
+
+.me > .msgBox{
+    border-bottom-right-radius: 0px;
+    background-color: rgb(135, 226, 0);
+}
+
+.you > .msgBox{
+    border-bottom-left-radius: 0px;
+}
+
+
+.me{
+    justify-content: end;
+}
+
+.you{
+    justify-content: start;;
+}
+
+.message{
+    height: 7vh;
+    width: 82vw;
+    display: flex;
+}
+
+.message input{
+    width: 78vw;
+    padding: 1vh 2vw;
+    font-family: oswald;
+    font-size: 1.3vw;
+    background-color: rgb(216, 216, 216);
+}
+
+.send{
+    background-color: var(--aceent-2);
+    width: 8vh;
+    border: black 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 2vw;
+    transition: all 100ms ease-out;
+}
+
+.send:active{
+    font-size: 1vw;
+}

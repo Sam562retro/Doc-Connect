@@ -9,6 +9,12 @@ const fileupload = require("express-fileupload");
 const fs= require("fs");
 const randomstring = require("randomstring");
 
+const http = require('http');
+const server = http.createServer(app);
+
+const socketIo = require('socket.io');
+const io = new socketIo.Server(server);
+
 // *******************************************************************************************************************
 
 const docRouter = require("./router/doctor");
@@ -92,9 +98,9 @@ app.get("/logreg", (req, res) => {
     res.render("logreg")
 })
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
     if(req.body.type == "doctor"){
-        docSchema.find({phone: req.body.mobile, password: req.body.password})
+        await docSchema.find({phone: req.body.mobile, password: req.body.password})
         .then(ret => {
             if(ret[0]._id){
                 session=req.session;
@@ -108,7 +114,7 @@ app.post("/login", (req, res) => {
             res.redirect("/logreg")
         })
     }else if(req.body.type == "patient"){
-        patSchema.find({phone: req.body.mobile, password: req.body.password})
+        await patSchema.find({phone: req.body.mobile, password: req.body.password})
         .then(ret => {
             if(ret[0]._id){
                 session=req.session;
@@ -122,7 +128,7 @@ app.post("/login", (req, res) => {
             res.redirect("/logreg")
         })
     }else if(req.body.type == "hospital"){
-        hospSchema.find({phone: req.body.mobile, password: req.body.password})
+        await hospSchema.find({phone: req.body.mobile, password: req.body.password})
         .then(ret => {
             if(ret[0]._id){
                 session=req.session;
@@ -140,7 +146,7 @@ app.post("/login", (req, res) => {
     }
 })
 
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
     if(req.body.type == "doctor"){
         var obj = { 
             name : req.body.name, 
@@ -161,7 +167,7 @@ app.post("/register", (req, res) => {
         req.files.mdms.mv(filePath2).catch(err=> (console.log(err)))
         obj.mdms = `/doctor-proofs/${fileName2}`;
 
-        docSchema.create(obj).then(item => {
+        await docSchema.create(obj).then(item => {
             session=req.session;
             session.userid=item._id;
             res.redirect("/doctor");
@@ -171,7 +177,7 @@ app.post("/register", (req, res) => {
         })
 
     }else if(req.body.type == "patient"){
-        patSchema.create({
+        await patSchema.create({
             name: req.body.name,
             password:req.body.password,
             phone:req.body.mobile,
@@ -203,7 +209,7 @@ app.post("/register", (req, res) => {
         req.files.img.mv(filePath).catch(err=> (console.log(err)))
         obj.image = `/hospital-images/` + fileName;
 
-        hospSchema.create(obj).then(item => {
+        await hospSchema.create(obj).then(item => {
             session=req.session;
             session.userid=item._id;
             res.redirect("/hospital")
@@ -224,10 +230,46 @@ app.get("/logout", (req, res) => {
     res.redirect("/logreg")
 })
 
+// *******************************************************************************************************************
+
+
+io.on('connection', (socket) => {
+      socket.on('roomDetails', (msg) => {
+        socket.join(msg.roomId);
+      })
+
+      socket.on('msg', (msg) => {
+        patSchema.findById(msg.patId).then(pat => {
+            var x = pat.chat;
+            x.push([msg.user, msg.data])
+            patSchema.findByIdAndUpdate(msg.patId, {chat : x}).catch(err => {console.log(err)})
+        }).catch(err => console.log(err))
+
+        io.to(msg.roomId).emit("msgReturn", {user: msg.user, data : msg.data});
+      })
+});
+
+
+app.get("/doctor/patients/chat/:id", (req, res) => {
+    patSchema.findById(req.params.id).then(pat => {
+        res.render("dashboard", {type: "doctor", subType: "chat", docId: req.session.userid, patId : req.params.id, chatHis: pat.chat })
+    }).catch(err => {console.log(err)})
+})
+
+app.get("/patient/chat", async (req, res) => {
+    await patSchema.findById(req.session.userid).then(async pat => {
+        await docSchema.findById(pat.doc).then(doc => {
+            res.render("dashboard", {type: "patient", subType: "chat", patId: req.session.userid, docId : doc._id, chatHis : pat.chat})
+        }).catch(err => {console.log(err)})
+    }).catch(err => {console.log(err)})
+})
+
+// *******************************************************************************************************************
+
 app.use('/doctor', docRouter);
 app.use('/hospital', hospRouter);
 app.use('/patient', patRouter);
 
 // *******************************************************************************************************************
 
-app.listen(8000);
+server.listen(8000);

@@ -46,8 +46,6 @@ router.post('/book/:id', async (req, res) => {
     }).catch(err => res.send(err))
 })
 
-router.get("/chat")
-
 router.get("/room", async (req, res) => {
     await patSchema.findById(req.session.userid).select({password: 0, prescriptions: 0}).then(async obj => {
         if(obj.room !== "false"){

@@ -1,0 +1,72 @@
+        <link rel="stylesheet" href="/css/chat.css">
+        <div class="header">
+            <span class="docName">Chat with <% if(type == "doctor"){ %>Patient<% }else{ %>Doctor<% } %></span>
+        </div>
+        <div class="chatBox" id="chatBox">
+            <% chatHis.forEach(cha => { %>
+                <div class="msg <% if(cha[0] == type){ %>me<% }else{ %>you<% } %>">
+                    <div class="msgBox">
+                        <%= cha[1] %>
+                    </div>
+                </div>
+            <% }) %>
+            
+        </div>
+        <form class="message" id="form">
+            <input type="text" id="input" autocomplete="off" placeholder="Type your message here…">
+            <button class="send" type="submit"><i class="bi bi-send"></i></button>
+        </form>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+
+            var form = document.getElementById('form');
+            var input = document.getElementById('input');
+
+            window.onload = (event) => {
+                socket.emit('roomDetails', {
+                    users: ["<%= patId %>", "<%= docId %>"],
+                    roomId: "<%= patId %><%= docId %>"
+                });
+            };
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (input.value) {
+                    socket.emit('msg', {
+                        roomId : "<%= patId %><%= docId %>",
+                        user : "<%= type %>",
+                        data : input.value,
+                        patId : "<%= patId %>"
+                    });
+                    input.value = '';
+                }
+            });
+
+            socket.on('msgReturn', (msgData) => {
+                var g = document.createElement("div")
+                g.classList.add("msg")
+                if(msgData.user == "<%= type %>"){
+                    g.classList.add("me")
+                }else{
+                    g.classList.add("you")
+                }
+
+                var l = document.createElement("div")
+                l.classList.add("msgBox")
+                l.appendChild(document.createTextNode(msgData.data))
+
+                g.appendChild(l)
+
+                document.getElementById("chatBox").appendChild(g)
+            })
+
+            socket.on('chat message', function(msg) {
+                var item = document.createElement('li');
+                item.textContent = msg;
+                messages.appendChild(item);
+                window.scrollTo(0, document.body.scrollHeight);
+            });
+
+        </script>
+        

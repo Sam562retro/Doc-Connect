@@ -74,8 +74,6 @@ router.get("/patients", async (req, res) => {
     }).catch(err => res.send(err))
 })
 
-router.get("/patients/chat/:id")
-
 router.get("/patients/room/:id", async (req, res) => {
     await patSchema.findById(req.params.id).then(async pat => {
         if(pat.room !== "false"){
