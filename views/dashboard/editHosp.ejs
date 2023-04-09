@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/editHosp.css" >
+<img src="<%= hospitalData.image %>" alt="" class="hospitalImg">
+<div class="details">
+    <div class="bookRoom row">
+        <form class="form" style="border-right: none;" method="post" action="/hospital/edit">
+            <div class="subheading2">Edit your hospital's details</div>
+            <div class="dates dates-input">
+                <div class="containerInput col-sm-8">
+                    <input type="number" id="Email" class="input" value="<%= hospitalData.fare %>" name="fare">
+                    <label class="label">Room Fare (per hour)</label>
+
+                    <input maxlength="10" type="tel" id="Email" class="input" value="<%= hospitalData.phone %>" name="phone">
+                    <label class="label">Phone No.</label>
+
+                    <input type="text" id="Email" class="input" value="<%= hospitalData.email %>" name="email">
+                    <label class="label">Email</label>
+                </div>
+                <div class="textarea-input">
+                    <span class="heading">Facilities:</span>
+                    <textarea placeholder="facilities…" name="roomData" id="" cols="30" rows="10"><%= hospitalData.roomData %></textarea>
+                </div>
+            </div>
+            <input type="submit" class="reqBtn" value='Edit Details'>
+        </form>
+    </div>

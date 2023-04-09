@@ -52,7 +52,7 @@
                 <span>Your Patients</span>
             </div>
         <%}else if(type == "hospital"){%>
-            <div class="item">
+            <div class="item" onclick="location.href=('/hospital/edit')">
                 <i class="bi bi-hospital icon"></i>
                 <span>Edit Details</span>
             </div>
@@ -61,14 +61,23 @@
                 <span>Room Requests</span>
             </div>
         <%}else if(type == "patient" && subType == "patHome"){%>
-            <div class="item">
-                <i class="bi bi-hospital icon" onclick="location.href=('/patient/')"></i>
+            <div class="item" onclick="location.href=('/patient/')">
+                <i class="bi bi-hospital icon" ></i>
                 <span>Browse Doctors</span>
             </div>
         <%}else if(type == "patient" && subType == "bookDoc"){%>
-            <div class="item">
-                <i class="bi bi-hospital icon" onclick="location.href=('/patient/')"></i>
+            <div class="item" onclick="location.href=('/patient/')">
+                <i class="bi bi-hospital icon"></i>
                 <span>Browse Doctors</span>
+            </div>
+        <%}else if(type == "patient"){%>
+            <div class="item" onclick="location.href=('/patient/chat')">
+                <i class="bi bi-hospital icon" ></i>
+                <span>Chat With Doctor</span>
+            </div>
+            <div class="item" onclick="location.href=('/patient/room')">
+                <i class="bi bi-hospital icon" ></i>
+                <span>Checkup Room Details</span>
             </div>
         <%}%>
     </div>
@@ -96,6 +105,38 @@
         <%- include('dashboard/hospHome') %>
     <%}else if(subType == "hospRequests"){%>
         <%- include('dashboard/hospRequests') %>
+    <%}else if(subType == "patHomeDoc"){%>
+        <%- include('dashboard/patHomeDoc') %>
+    <%}else if(subType == "editHosp"){%>
+        <%- include('dashboard/editHosp') %>
+    <%}else if(subType == "noHospPat"){%>
+        <style>
+            .mainContent{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                height: 100vh;
+                background-color: #B2D4EA;
+            }
+        </style>
+        <h2>Your Doctor Has Not Chosen A Room For You Yet.</h2>
+        <br>
+        <h4>Ask Your Doctor To Do So And Also Ask The Timings For Appointment</h4>
+    <%}else if(subType == "noHospDoc"){%>
+        <style>
+            .mainContent{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                height: 100vh;
+                background-color: #B2D4EA;
+            }
+        </style>
+        <h2>You Have Not Chosen A Room For This Patient Yet.</h2>
+        <br>
+        <h4>Do So And Also Ask Convey The Timings Appointment To Patient Through Chat</h4>
     <%}else{%>
         <style>
             .mainContent{

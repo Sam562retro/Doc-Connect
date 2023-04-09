@@ -37,11 +37,6 @@ const patSchema = new mongoose.Schema({
         type: String,
         default: false
     },
-    prescriptions:{
-        required: true,
-        type: [[[String, String]]],
-        default: []
-    }, 
     location: {
         type: [String],
         required: true
