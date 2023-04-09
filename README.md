@@ -4,16 +4,16 @@
 # Admin-Credientials 🔑
 
 ### Patient
- Email - 
- Password-
+ Phone - 9873413940
+ Password- admin
 
 ### Doctor
- Email - 
- Password-
+ Phone - 1234567890
+ Password- admin
 
 ### Hospital
- Email - 
- Password-
+ Phone - 9087654321
+ Password- admin
 
 *though you can register through the register page in our website this is just to make your experience quicker*
 
@@ -69,5 +69,6 @@ Therefore, we believe that if we are able to introduce this app on a large scale
 - Express
 - Body Parsor
 - EJS
+- Socket.io
 
 ---
