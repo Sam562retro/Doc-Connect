@@ -230,3 +230,8 @@ select {
   border-radius: 0.5vw;
 
 }
+
+
+.align{
+  text-align: center !important;
+}

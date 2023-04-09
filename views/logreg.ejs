@@ -66,7 +66,7 @@
           </div>
 
           <div class="select">
-            <select name="type" id="type-register" onclick onchange="changeSpeacialField()">
+            <select name="type" id="type-register" onclick onload onchange="changeSpeacialField()">
                <option selected disabled>Who are you (Select)</option>
                <option value="doctor">Doctor</option>
                <option value="patient">Patient</option>
@@ -99,6 +99,14 @@
       if(urlParams.has('register')){
         activeR()
       }
+      if(urlParams.has('doctor')){
+        document.getElementById("type-register").value = "doctor"
+      }else if(urlParams.has('patient')){
+        document.getElementById("type-register").value = "patient"
+      }else if(urlParams.has('hospital')){
+        document.getElementById("type-register").value = "hospital"
+      }
+      changeSpeacialField()
     }
 
 
@@ -112,6 +120,7 @@
         var sub = document.createElement("input");
         sub.setAttribute("type", "submit");
         sub.classList.add("sign-in");
+        sub.classList.add("align");
         sub.setAttribute("value", "Register");
         box.appendChild(sub);
 
@@ -121,33 +130,18 @@
         var lis = []
         if(type == "doctor"){
             
-            navigator.geolocation.getCurrentPosition(pos, eror)
-
-            function pos(position){
-                var la = document.createElement("input");
-                la.setAttribute("type", "hidden");
-                la.setAttribute("name", "latitude");
-                la.value = position.coords.latitude;
-                box.appendChild(la);
-                var lo = document.createElement("input");
-                lo.setAttribute("type", "hidden");
-                lo.setAttribute("name", "longitude");
-                lo.value = position.coords.longitude;
-                box.appendChild(lo);
-            }
-
-            function eror(error){
-                var la = document.createElement("input");
-                la.setAttribute("type", "hidden");
-                la.setAttribute("name", "latitude");
-                la.value = false;
-                box.appendChild(la);
-                var lo = document.createElement("input");
-                lo.setAttribute("type", "hidden");
-                lo.setAttribute("name", "longitude");
-                lo.value = false;
-                box.appendChild(lo);
-            }
+          function pos(position){
+              var la = document.createElement("input");
+              la.setAttribute("type", "hidden");
+              la.setAttribute("name", "latitude");
+              la.value = false;
+              box.appendChild(la);
+              var lo = document.createElement("input");
+              lo.setAttribute("type", "hidden");
+              lo.setAttribute("name", "longitude");
+              lo.value = false;
+              box.appendChild(lo);
+          }
 
             lis = [
                 {
@@ -173,22 +167,7 @@
             ]
         }else if(type == "patient"){
 
-          navigator.geolocation.getCurrentPosition(pos, eror)
-
           function pos(position){
-              var la = document.createElement("input");
-              la.setAttribute("type", "hidden");
-              la.setAttribute("name", "latitude");
-              la.value = position.coords.latitude;
-              box.appendChild(la);
-              var lo = document.createElement("input");
-              lo.setAttribute("type", "hidden");
-              lo.setAttribute("name", "longitude");
-              lo.value = position.coords.longitude;
-              box.appendChild(lo);
-          }
-
-          function eror(error){
               var la = document.createElement("input");
               la.setAttribute("type", "hidden");
               la.setAttribute("name", "latitude");
